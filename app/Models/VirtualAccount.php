@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class VirtualAccount extends Model
 {
     use HasFactory;
+    protected $table = 'virtual_accounts';
+
+    protected $fillable = [
+        'student_id',
+        'virtual_account_number',
+        'expired_at',
+        'is_active',
+        'nominal'
+    ];
 }
