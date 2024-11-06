@@ -18,6 +18,7 @@ class CreateStudentsTable extends Migration
             $table->unsignedBigInteger('institution_id');
             $table->string('student_id');
             $table->string('name');
+            $table->string('password');
             $table->boolean('is_deleted')->default(false);;
             $table->timestamps();
 
