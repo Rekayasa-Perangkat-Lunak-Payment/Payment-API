@@ -15,7 +15,7 @@ class CreateInstitutionAdminsTable extends Migration
     {
         Schema::create('institution_admins', function (Blueprint $table) {
             $table->id();
-            $table->string('institution_id');
+            $table->unsignedBigInteger('institution_id');
             $table->string('username');
             $table->string('password');
             $table->string('name');
