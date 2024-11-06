@@ -10,7 +10,7 @@ class BankAdmin extends Model
 {
     use HasFactory;
     protected $table = 'bank_admins';
-    protected $guarded = ['id', 'username', 'password'];
+    protected $guarded = ['username', 'password'];
 
     public function setPasswordAttribute($value)
     {
