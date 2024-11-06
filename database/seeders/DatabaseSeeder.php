@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\InstitutionSeeder;
+use Database\Seeders\BankAdminSeeder;
+use Database\Seeders\InstitutionAdminSeeder;
+use Database\Seeders\StudentSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // Call other seeders here
+        $this->call([
+            InstitutionSeeder::class,
+            BankAdminSeeder::class,
+            InstitutionAdminSeeder::class,
+            StudentSeeder::class,
+            // Add other seeders as needed
+        ]);
     }
 }
