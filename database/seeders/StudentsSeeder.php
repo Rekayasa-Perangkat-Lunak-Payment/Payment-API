@@ -19,6 +19,7 @@ class StudentsSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             Student::create([
                 'institution_id' => 1,
+                'student_id' => $faker->ean8,
                 'name' => $faker->name
             ]);
         };

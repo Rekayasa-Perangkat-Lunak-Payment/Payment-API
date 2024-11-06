@@ -16,6 +16,7 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('institution_id');
+            $table->string('student_id');
             $table->string('name');
             $table->boolean('is_deleted')->default(false);;
             $table->timestamps();
