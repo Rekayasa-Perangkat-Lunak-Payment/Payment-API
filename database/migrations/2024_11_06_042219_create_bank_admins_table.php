@@ -15,6 +15,9 @@ class CreateBankAdminsTable extends Migration
     {
         Schema::create('bank_admins', function (Blueprint $table) {
             $table->id();
+            $table->string('username');
+            $table->string('password');
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }

@@ -15,6 +15,12 @@ class CreateInstitutionAdminsTable extends Migration
     {
         Schema::create('institution_admins', function (Blueprint $table) {
             $table->id();
+            $table->string('institution_id');
+            $table->string('username');
+            $table->string('password');
+            $table->string('name');
+            $table->string('title');
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }
