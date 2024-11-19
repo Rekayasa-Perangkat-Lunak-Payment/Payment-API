@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBankAdminsTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateBankAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bank_admins', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->string('name');
+            $table->string('username')->unique();
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateBankAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bank_admins');
+        Schema::dropIfExists('users');
     }
 }

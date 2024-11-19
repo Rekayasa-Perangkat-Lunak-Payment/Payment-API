@@ -15,12 +15,10 @@ class CreateInstitutionAdminsTable extends Migration
     {
         Schema::create('institution_admins', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->unsignedBigInteger('institution_id');
-            $table->string('username');
-            $table->string('password');
             $table->string('name');
             $table->string('title');
-            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
             $table->foreign('institution_id')->references('id')->on('institutions')->onDelete('cascade');
