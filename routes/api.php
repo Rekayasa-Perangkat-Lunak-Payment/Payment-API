@@ -7,6 +7,7 @@ use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\BankAdminController;
 use App\Http\Controllers\InstitutionAdminController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,12 @@ use App\Http\Controllers\TransactionController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('/profile', [UserController::class, 'profile'])->middleware('auth:sanctum');
+Route::post('/update-profile', [UserController::class, 'updateProfile'])->middleware('auth:sanctum');
+Route::post('/register', [UserController::class, 'register']);
+
 Route::apiResource('transactions', TransactionController::class);
 Route::apiResource('institutions', InstitutionController::class);
 Route::apiResource('students', StudentController::class);
