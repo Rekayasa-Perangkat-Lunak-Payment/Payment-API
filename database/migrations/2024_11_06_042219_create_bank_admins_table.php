@@ -17,6 +17,7 @@ class CreateBankAdminsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
+            $table->string('nik');
             $table->timestamps();
         });
     }
