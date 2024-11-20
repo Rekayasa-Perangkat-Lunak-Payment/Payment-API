@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStudentsTable extends Migration
+class CreatePaymentPeriodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,17 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('payment_periods', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('institution_id');
             $table->unsignedBigInteger('year_id');
-            $table->string('student_id');
-            $table->string('name');
-            $table->enum('gender', ['Pria', 'Wanita'])->default('Pria');
-            $table->integer('balance')->default(0);
-            $table->string('password');
-            $table->string('major');
+            $table->unsignedBigInteger('institution_id');
+            $table->string('period');
+            $table->integer('amount');
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
-            $table->foreign('institution_id')->references('id')->on('institutions')->onDelete('cascade');
             $table->foreign('year_id')->references('id')->on('years')->onDelete('cascade');
+            $table->foreign('institution_id')->references('id')->on('institutions')->onDelete('cascade');
         });
     }
 
@@ -38,6 +34,6 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('payment_periods');
     }
 }
