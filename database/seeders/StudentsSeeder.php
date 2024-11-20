@@ -20,7 +20,8 @@ class StudentsSeeder extends Seeder
             Student::create([
                 'institution_id' => 1,
                 'student_id' => $faker->ean8,
-                'name' => $faker->name
+                'name' => $faker->name,
+                'password' => $faker->ean8
             ]);
         };
     }
