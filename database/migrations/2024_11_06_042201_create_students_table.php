@@ -16,10 +16,10 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('institution_id');
-            $table->unsignedBigInteger('year_id');
             $table->string('student_id');
             $table->string('name');
             $table->enum('gender', ['Pria', 'Wanita'])->default('Pria');
+            $table->char('year', 4);
             $table->integer('balance')->default(0);
             $table->string('password');
             $table->string('major');
@@ -27,7 +27,6 @@ class CreateStudentsTable extends Migration
             $table->timestamps();
 
             $table->foreign('institution_id')->references('id')->on('institutions')->onDelete('cascade');
-            $table->foreign('year_id')->references('id')->on('years')->onDelete('cascade');
         });
     }
 
