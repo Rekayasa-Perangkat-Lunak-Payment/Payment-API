@@ -19,9 +19,7 @@ class CreateVirtualAccountsTable extends Migration
             $table->dateTime('expired_at');
             $table->boolean('is_active')->default(true);
             $table->decimal('total_amount', 10, 2);
-            $table->string('payment_period');
             $table->timestamps();
-
         });
     }
 
