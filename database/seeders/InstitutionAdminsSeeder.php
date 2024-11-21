@@ -16,13 +16,12 @@ class InstitutionAdminsSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 0; $i < 1; $i++) {
             InstitutionAdmin::create([
+                'user_id' => 2,
                 'institution_id' => 1,
-                'name' => $faker->name,
+                'name' => 'Institution Admin',
                 'title' => $faker->jobTitle,
-                'username' => $faker->userName,
-                'password' => $faker->password
             ]);
         }
     }
