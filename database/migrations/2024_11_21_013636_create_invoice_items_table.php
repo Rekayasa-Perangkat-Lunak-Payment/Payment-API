@@ -15,6 +15,12 @@ class CreateInvoiceItemsTable extends Migration
     {
         Schema::create('invoice_items', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('invoice_id');
+            $table->enum('type', ['Credits', 'Late Charge', 'Penalty Charge', 'Discount', 'Scholarship', 'Other'])->default('Credits');
+            $table->string('description')->nullable();
+            $table->integer('cost');
+            $table->integer('quantity');
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }
