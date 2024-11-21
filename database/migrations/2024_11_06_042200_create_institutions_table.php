@@ -23,6 +23,8 @@ class CreateInstitutionsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->string('account_number')->unique();
+            $table->integer('balance')->default(0);
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }
