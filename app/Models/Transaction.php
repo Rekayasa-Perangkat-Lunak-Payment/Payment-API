@@ -14,6 +14,5 @@ class Transaction extends Model
         'virtual_account_id',
         'transaction_date',
         'total',
-        'is_success',
     ];
 }
