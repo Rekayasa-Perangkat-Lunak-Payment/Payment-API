@@ -11,15 +11,9 @@ class InstitutionAdmin extends Model
     use HasFactory;
     protected $table = 'institution_admins';
     protected $fillable = [
+        'user_id',
         'institution_id',
         'name',
         'title',
-        'username',
-        'password'
     ];
-
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = Hash::make($value);
-    }
 }
