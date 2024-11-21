@@ -15,12 +15,12 @@ class CreateVirtualAccountsTable extends Migration
     {
         Schema::create('virtual_accounts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id'); // Reference to the student
+            $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('payment_period_id');
-            $table->string('virtual_account_number')->unique(); // Virtual account number
-            $table->dateTime('expired_at'); // Expiration date
-            $table->boolean('is_active')->default(true); // Active status (default to true)
-            $table->decimal('total_amount', 10, 2); // Nominal amount (precision 10, scale 2 for decimal)
+            $table->string('virtual_account_number')->unique();
+            $table->dateTime('expired_at');
+            $table->boolean('is_active')->default(true);
+            $table->decimal('total_amount', 10, 2);
             $table->string('payment_period');
             $table->timestamps();
 
