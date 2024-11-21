@@ -17,7 +17,7 @@ class CreateInvoiceTable extends Migration
             $table->id();
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('payment_period_id');
-            $table->integer('total_credits');
+            $table->integer('total_amount');
             $table->timestamps();
 
             // Set up the foreign key relationship if needed (assuming a student model exists)
