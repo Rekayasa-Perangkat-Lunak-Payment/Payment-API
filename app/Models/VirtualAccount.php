@@ -11,10 +11,10 @@ class VirtualAccount extends Model
     protected $table = 'virtual_accounts';
 
     protected $fillable = [
-        'student_id',
+        'invoice_id',
         'virtual_account_number',
         'expired_at',
         'is_active',
-        'nominal'
+        'total_amount'
     ];
 }
