@@ -14,7 +14,11 @@ class Student extends Model
         'institution_id',
         'student_id',
         'name',
+        'gender',
+        'year',
+        'balance',
         'password',
+        'major',
         'is_deleted',
     ];
 
