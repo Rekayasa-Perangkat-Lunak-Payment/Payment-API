@@ -20,6 +20,8 @@ class CreateItemTypesTable extends Migration
             $table->string('description')->nullable();
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
+
+            $table->foreign('institution_id')->references('id')->on('institutions')->onDelete('cascade');
         });
     }
 
