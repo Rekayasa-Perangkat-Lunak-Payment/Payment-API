@@ -10,10 +10,10 @@ class BankAdmin extends Model
 {
     use HasFactory;
     protected $table = 'bank_admins';
-    protected $guarded = ['username', 'password'];
 
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = Hash::make($value);
-    }
+    protected $fillable = [
+        'user_id',
+        'name',
+        'nik',
+    ];
 }
