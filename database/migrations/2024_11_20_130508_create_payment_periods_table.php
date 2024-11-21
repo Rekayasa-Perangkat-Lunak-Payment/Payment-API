@@ -15,14 +15,15 @@ class CreatePaymentPeriodsTable extends Migration
     {
         Schema::create('payment_periods', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('year_id');
             $table->unsignedBigInteger('institution_id');
-            $table->string('period');
-            $table->integer('amount');
+            $table->char('year', 4);
+            $table->char('month', 2)->nullable();
+            $table->string('semester')->nullable();
+            $table->integer('fixed_cost');
+            $table->integer('credit_cost');
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
-            $table->foreign('year_id')->references('id')->on('years')->onDelete('cascade');
             $table->foreign('institution_id')->references('id')->on('institutions')->onDelete('cascade');
         });
     }
