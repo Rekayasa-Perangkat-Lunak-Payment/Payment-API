@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Institution;
 use Illuminate\Database\Seeder;
 use App\Models\InstitutionAdmin;
 
@@ -14,15 +15,11 @@ class InstitutionAdminsSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create();
-
-        for ($i = 0; $i < 1; $i++) {
-            InstitutionAdmin::create([
-                'user_id' => 2,
-                'institution_id' => 1,
-                'name' => 'Institution Admin',
-                'title' => $faker->jobTitle,
-            ]);
-        }
+        InstitutionAdmin::create([
+            'user_id' => 2,
+            'institution_id' => 1,
+            'name' => 'Bank Admin',
+            'title' => 'Biro Keuangan',
+        ]);
     }
 }
