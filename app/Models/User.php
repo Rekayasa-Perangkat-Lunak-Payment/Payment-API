@@ -26,4 +26,14 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = Hash::make($value);
     }
+
+    public function bankAdmin()
+    {
+        return $this->hasOne(BankAdmin::class);
+    }
+
+    public function institutionAdmin()
+    {
+        return $this->hasOne(InstitutionAdmin::class);
+    }
 }
