@@ -14,14 +14,10 @@ class BankAdminsSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create();
-
-        for ($i = 0; $i < 1; $i++) {
-            BankAdmin::create([
-                'user_id' => 1,
-                'name' => 'Bank Admin',
-                'nik' => $faker->ean8
-            ]);
-        }
+        BankAdmin::create([
+            'user_id' => 1,
+            'name' => 'Bank Admin',
+            'nik' => '1234567890',
+        ]);
     }
 }
