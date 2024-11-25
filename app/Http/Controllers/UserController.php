@@ -19,6 +19,18 @@ class UserController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
+
+            // Determine user type (BankAdmin or InstitutionAdmin)
+            $roleData = $user->load(['bankAdmin', 'institutionAdmin']);
+            $role = $roleData->bankAdmin ? 'BankAdmin' : ($roleData->institutionAdmin ? 'InstitutionAdmin' : null);
+
+            if (!$role) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'User does not belong to any valid role'
+                ], 403);
+            }
+
             $token = $user->createToken('authToken')->plainTextToken;
 
             return response()->json([
@@ -26,6 +38,8 @@ class UserController extends Controller
                 'message' => 'Login successful',
                 'data' => [
                     'user' => $user,
+                    'role' => $role,
+                    'role_data' => $roleData->$role, // Include specific role data
                     'token' => $token
                 ]
             ]);
@@ -36,6 +50,7 @@ class UserController extends Controller
             'message' => 'Invalid email or password'
         ], 401);
     }
+
     /**
      * Handle user logout.
      */
@@ -48,16 +63,25 @@ class UserController extends Controller
             'message' => 'Logged out successfully'
         ]);
     }
+
     /**
      * Get the authenticated user's profile.
      */
     public function profile(Request $request)
     {
+        $user = $request->user()->load(['bankAdmin', 'institutionAdmin']);
+        $role = $user->bankAdmin ? 'BankAdmin' : ($user->institutionAdmin ? 'InstitutionAdmin' : null);
+
         return response()->json([
             'status' => 'success',
-            'data' => $request->user()
+            'data' => [
+                'user' => $user,
+                'role' => $role,
+                'role_data' => $role ? $user->$role : null
+            ]
         ]);
     }
+
     /**
      * Update user profile.
      */
@@ -77,6 +101,7 @@ class UserController extends Controller
             'data' => $user
         ]);
     }
+
     /**
      * Handle user registration.
      */
@@ -105,5 +130,4 @@ class UserController extends Controller
             ]
         ]);
     }
-    
 }
