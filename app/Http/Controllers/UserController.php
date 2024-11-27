@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -17,45 +19,36 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            $user = Auth::user();
-
-            // Determine user type (BankAdmin or InstitutionAdmin)
-            $roleData = $user->load(['bankAdmin', 'institutionAdmin']);
-            $role = $roleData->bankAdmin ? 'BankAdmin' : ($roleData->institutionAdmin ? 'InstitutionAdmin' : null);
-
-            if (!$role) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'User does not belong to any valid role'
-                ], 403);
-            }
-
-            $token = $user->createToken('authToken')->plainTextToken;
-
+        // Retrieve the user by email
+        $user = User::where('email', $request->email)->first();
+        dd($user);
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
-                'status' => 'success',
-                'message' => 'Login successful',
-                'data' => [
-                    'user' => $user,
-                    'role' => $role,
-                    'role_data' => $roleData->$role, // Include specific role data
-                    'token' => $token
-                ]
-            ]);
+                'status' => 'error',
+                'message' => 'Invalid email or password'
+            ], 401);
         }
 
+        // If user exists and password is correct, generate token
+        $token = $user->createToken('authToken')->plainTextToken;
+
         return response()->json([
-            'status' => 'error',
-            'message' => 'Invalid email or password'
-        ], 401);
+            'status' => 'success',
+            'message' => 'Login successful',
+            'data' => [
+                'user' => $user,
+                'token' => $token
+            ]
+        ]);
     }
+
 
     /**
      * Handle user logout.
      */
     public function logout(Request $request)
     {
+        // Delete the user's current token
         $request->user()->currentAccessToken()->delete();
 
         return response()->json([

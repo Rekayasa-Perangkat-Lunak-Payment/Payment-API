@@ -24,7 +24,9 @@ use App\Http\Controllers\UserController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::post('/login', [UserController::class, 'login']);
+
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/profile', [UserController::class, 'profile'])->middleware('auth:sanctum');
 Route::post('/update-profile', [UserController::class, 'updateProfile'])->middleware('auth:sanctum');

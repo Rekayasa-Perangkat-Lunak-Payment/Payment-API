@@ -36,8 +36,12 @@ return [
     */
 
     'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
         'api' => [
-            'driver' => 'sanctum',
+            'driver' => 'token',  // Use token-based authentication
             'provider' => 'users',
         ],
     ],
